@@ -24,13 +24,6 @@ namespace Project_X
 			NAPI.Chat.SendChatMessageToPlayer(player, "Hello!");
 		}
 
-		[Command("c1", Alias = "hello, hey, howdy")]
-		public void SayC1(Player player)
-		{
-			NAPI.Chat.SendChatMessageToPlayer(player, "Hello!");
-		}
-
-
 
 		[Command("car")]
 		public void CmdCreateCar(Player client, string type)

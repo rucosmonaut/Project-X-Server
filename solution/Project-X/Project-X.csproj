@@ -6,12 +6,13 @@
 	<CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
     <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
     <PlatformTarget>x64</PlatformTarget>
-    <BaseOutputPath>E:\Project-X-Server\dotnet\resources\roleplay</BaseOutputPath>
+    <BaseOutputPath>C:\VirtuallD\Project-X-Server\dotnet\resources\roleplay</BaseOutputPath>
+    <OutputType>Library</OutputType>
   </PropertyGroup>
 
   <ItemGroup>
     <Reference Include="Bootstrapper">
-		<HintPath>..\..\..\libs\Bootstrapper.dll</HintPath>
+      <HintPath>..\..\libs\Bootstrapper.dll</HintPath>
     </Reference>
   </ItemGroup>
 
