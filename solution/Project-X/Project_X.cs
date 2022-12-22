@@ -1,10 +1,10 @@
 ﻿using System;
+using System.Reflection;
 using GTANetworkAPI;
 
 namespace Project_X
 {
-
-	public class Project_X : Script
+    public class Project_X : Script
 	{
 
 		[ServerEvent(Event.ResourceStart)] //This type of event is mainly used for handling stuff after this resource has been initiated.
@@ -28,8 +28,10 @@ namespace Project_X
 		public void CmdCreateCar(Player player, string type, int color1, int color2)
 		{
 			uint myCarType = NAPI.Util.GetHashKey(type);
-			NAPI.Vehicle.CreateVehicle(myCarType, player.Position.Around(5), 0, color1, color2);
-		}
+            var veh = NAPI.Vehicle.CreateVehicle(myCarType, player.Position.Around(5), 0, color1, color2);
+			NAPI.Chat.SendChatMessageToPlayer(player, $"Cкорость Т/C: {(veh.MaxSpeed * 3.6)}");
+			
+        }
 
 		[Command("sethealth")]
 		public void CmdSetHealth(Player player, int amount)
@@ -130,7 +132,7 @@ namespace Project_X
 		[ServerEvent(Event.PlayerDeath)] //This type of event is used for handling code when someone dies.
 		public void OnPlayerDeath(Player player, Player killer, uint reason)
 		{
-			if (!killer.IsNull)
+			if (!killer?.IsNull ?? false)
 			{
 				NAPI.Notification.SendNotificationToAll($"{killer.Name} killed {player.Name}");
 			}
