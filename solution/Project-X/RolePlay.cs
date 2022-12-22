@@ -13,7 +13,6 @@ namespace Project_X
 			Console.WriteLine("\n--------------------------------------");
 			Console.WriteLine("Blank Script by your name here");
 			Console.WriteLine("--------------------------------------\n");
-
 		}
 
 
@@ -26,29 +25,28 @@ namespace Project_X
 
 
 		[Command("car")]
-		public void CmdCreateCar(Player client, string type)
+		public void CmdCreateCar(Player player, string type, int color1, int color2)
 		{
-			Vehicle newVehicle;
 			uint myCarType = NAPI.Util.GetHashKey(type);
-			newVehicle = NAPI.Vehicle.CreateVehicle(myCarType, client.Position.Around(5), 0, 7, 7);
+			NAPI.Vehicle.CreateVehicle(myCarType, player.Position.Around(5), 0, color1, color2);
 		}
 
 		[Command("sethealth")]
-		public void CmdSetHealth(Player client, int amount)
+		public void CmdSetHealth(Player player, int amount)
 		{
 			if (amount > 50)
 			{
-				client.Health = 100;
+				player.Health = 100;
 				return;
 			}
 
 			if (amount < 5)
 			{
-				client.SendChatMessage("You can't set health lower than 5.");
+				player.SendChatMessage("You can't set health lower than 5.");
 				return;
 			}
-			client.Health = amount;
-			client.SendChatMessage($"Your health has been set to: {amount}");
+			player.Health = amount;
+			player.SendChatMessage($"Your health has been set to: {amount}");
 		}
 
 
@@ -102,8 +100,8 @@ namespace Project_X
 		{
 			player.SendChatMessage($"Welcome to our server {player.Name}");
 
-			var clientPosition = NAPI.Entity.GetEntityPosition(player);
-			NAPI.Checkpoint.CreateCheckpoint(CheckpointType.Cyclinder, clientPosition, new Vector3(0, 1, 0), 1f, new Color(255, 0, 0), 0);
+			var playerPosition = NAPI.Entity.GetEntityPosition(player);
+			NAPI.Checkpoint.CreateCheckpoint(CheckpointType.Cyclinder, playerPosition, new Vector3(0, 1, 0), 1f, new Color(255, 0, 0), 0);
 		}
 
 

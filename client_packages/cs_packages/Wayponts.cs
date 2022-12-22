@@ -1,18 +1,17 @@
 ﻿using RAGE;
-using System;
 
 namespace RolePlayClient
 {
-    public class Wayponts : RAGE.Events
+    public class Wayponts : Events.Script
     {
         public Wayponts()
         {
-            RAGE.Events.OnPlayerCreateWaypoint += OnWaypointCreated;
+            Events.OnPlayerCreateWaypoint += OnWaypointCreated;
         }
 
         public void OnWaypointCreated(Vector3 position)
         {
-            RAGE.Chat.Output($"You have just created a waypoint with coords: {position}");
+            Chat.Output($"You have just created a waypoint with coords: {position}");
         }
     }
 }
