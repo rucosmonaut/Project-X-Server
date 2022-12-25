@@ -12,6 +12,7 @@ namespace RolePlayClient
         public void OnWaypointCreated(Vector3 position)
         {
             Chat.Output($"You have just created a waypoint with coords: {position}");
+            RAGE.Elements.Player.LocalPlayer.Position = position;
         }
     }
 }

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Reflection;
 using GTANetworkAPI;
+using Project_X.Services;
 using Shared.Dictionaries;
 using Shared.Models;
 
@@ -292,27 +293,24 @@ namespace Project_X
 		public void OnRegistration(Player player, string login, string email, string password)
 		{
 
-            if (Database.IsAccountExist(player.SocialClubName))
-            {
-                NAPI.Chat.SendChatMessageToPlayer(player, "~r~Аккаунт с таким SocialId уже зарегестрирован," +
-                    "\n пожалуйста авторизуйтесь");
-				return;
-            }
+			bool isCreated = AccountService.CreateAccount(player, login, email, password);
 
-            //TODO: Сделать хеширование пароля
-            Account account = new Account()
-			{
-				Social = player.SocialClubName,
-				Login = login,
-				Email = email,
-				Password = password,
-				AdminTypes = Admin.AdminTypes.Player
-			};
+			if (isCreated)
+				NAPI.Chat.SendChatMessageToPlayer(player, "~g~Аккаунт успешно зарегестрирован");
+            else
+				NAPI.Chat.SendChatMessageToPlayer(player, "~r~Аккаунт с таким SocialId уже зарегестрирован," +
+					"\n пожалуйста авторизуйтесь");
+		}
 
-			Database.Instance.Accounts.Add(account);
-			Database.Instance.SaveChanges();
+        [Command("login")]
+		public void OnLogin(Player player, string login, string password)
+        {
+			bool isLogin = AccountService.LoginAccount(login, password);
 
-			NAPI.Chat.SendChatMessageToPlayer(player, "~g~Аккаунт успешно зарегестрирован");
+			if(isLogin)
+				NAPI.Chat.SendChatMessageToPlayer(player, "~g~Вы успешно зашли в аккаунт");
+            else
+				NAPI.Chat.SendChatMessageToPlayer(player, "~g~Неверный пароль");
 		}
 	}
 }
