@@ -14,12 +14,12 @@ namespace Project_X
 		{
 			Console.WriteLine("\n--------------------------------------");
 			Console.WriteLine("Blank Script by your name here");
-			Console.WriteLine("--------------------------------------\n");
+            Console.WriteLine("--------------------------------------\n");
 		}
 
 
 
-		[Command("hi", Alias = "hello, hey, howdy")]
+        [Command("hi", Alias = "hello, hey, howdy")]
 		public void SayHi(Player player)
 		{
 			NAPI.Chat.SendChatMessageToPlayer(player, "Hello!");
@@ -296,6 +296,7 @@ namespace Project_X
             {
                 NAPI.Chat.SendChatMessageToPlayer(player, "~r~Аккаунт с таким SocialId уже зарегестрирован," +
                     "\n пожалуйста авторизуйтесь");
+				return;
             }
 
             //TODO: Сделать хеширование пароля
@@ -311,8 +312,7 @@ namespace Project_X
 			Database.Instance.Accounts.Add(account);
 			Database.Instance.SaveChanges();
 
-			NAPI.Chat.SendChatMessageToPlayer(player, "~g~Аккаунт с таким SocialId уже зарегестрирован," +
-					"\n пожалуйста авторизуйтесь");
+			NAPI.Chat.SendChatMessageToPlayer(player, "~g~Аккаунт успешно зарегестрирован");
 		}
 	}
 }

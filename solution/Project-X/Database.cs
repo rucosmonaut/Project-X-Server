@@ -15,17 +15,7 @@ namespace Project_X
         {
             get
             {
-                if (_instance == null)
-                {
-                    try
-                    {
-                        _instance = new ApplicationContext();
-                    }
-                    catch(Exception e)
-                    {
-                        Console.WriteLine($"Ошибка соединения с базой данных. Exception: {e}");
-                    }
-                }
+                if (_instance == null) return _instance = new ApplicationContext();
 
                 return _instance;
             }
