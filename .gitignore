@@ -7,6 +7,7 @@
 /client_packages/game_resources/dlcpacks/*
 /linux_x64.tar.gz
 /ragemp-server.exe
+/solution/Project-X/Properties/launchSettings.json
 
 # User-specific files
 *.rsuser
@@ -31,6 +32,7 @@ x86/
 [Ww][Ii][Nn]32/
 [Aa][Rr][Mm]/
 [Aa][Rr][Mm]64/
+[Bb]in/
 bld/
 [Oo]bj/
 [Oo]ut/

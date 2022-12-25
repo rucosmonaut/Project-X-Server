@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Reflection;
 using GTANetworkAPI;
+using Shared.Dictionaries;
+using Shared.Models;
 
 namespace Project_X
 {
@@ -284,6 +286,33 @@ namespace Project_X
 		public void OnVehicleTrailerChange(Vehicle vehicle, Vehicle trailer)
 		{
 
+		}
+
+		[Command("reg")]
+		public void OnRegistration(Player player, string login, string email, string password)
+		{
+
+            if (Database.IsAccountExist(player.SocialClubName))
+            {
+                NAPI.Chat.SendChatMessageToPlayer(player, "~r~Аккаунт с таким SocialId уже зарегестрирован," +
+                    "\n пожалуйста авторизуйтесь");
+            }
+
+            //TODO: Сделать хеширование пароля
+            Account account = new Account()
+			{
+				Social = player.SocialClubName,
+				Login = login,
+				Email = email,
+				Password = password,
+				AdminTypes = Admin.AdminTypes.Player
+			};
+
+			Database.Instance.Accounts.Add(account);
+			Database.Instance.SaveChanges();
+
+			NAPI.Chat.SendChatMessageToPlayer(player, "~g~Аккаунт с таким SocialId уже зарегестрирован," +
+					"\n пожалуйста авторизуйтесь");
 		}
 	}
 }

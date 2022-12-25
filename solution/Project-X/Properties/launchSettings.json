@@ -2,8 +2,8 @@
   "profiles": {
     "Профиль 1": {
       "commandName": "Executable",
-      "executablePath": "C:\\VirtuallD\\Project-X-Server\\ragemp-server.exe",
-      "workingDirectory": "C:\\VirtuallD\\Project-X-Server"
+      "executablePath": "C:\\Users\\rucosmonaut\\Desktop\\Project-X-Server\\ragemp-server.exe",
+      "workingDirectory": "C:\\Users\\rucosmonaut\\Desktop\\Project-X-Server"
     }
   }
 }
