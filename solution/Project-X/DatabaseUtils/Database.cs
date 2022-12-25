@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Project_X
+namespace Project_X.DatabaseUtils
 {
     class Database
     {
@@ -22,10 +22,10 @@ namespace Project_X
             set { }
         }
 
-        public static bool IsAccountExist (string social)
+        public static bool IsAccountExist(string social)
         {
             Account account = Instance.Accounts.FirstOrDefault(account => account.Social == social);
-            if(account == null)
+            if (account == null)
             {
                 return false;
             }

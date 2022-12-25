@@ -1,9 +1,5 @@
 ﻿using System;
-using System.Reflection;
 using GTANetworkAPI;
-using Project_X.Services;
-using Shared.Dictionaries;
-using Shared.Models;
 
 namespace Project_X
 {
@@ -18,51 +14,11 @@ namespace Project_X
             Console.WriteLine("--------------------------------------\n");
 		}
 
-
-
-        [Command("hi", Alias = "hello, hey, howdy")]
-		public void SayHi(Player player)
-		{
-			NAPI.Chat.SendChatMessageToPlayer(player, "Hello!");
-		}
-
-
-		[Command("car")]
-		public void CmdCreateCar(Player player, string type, int color1, int color2)
-		{
-			uint myCarType = NAPI.Util.GetHashKey(type);
-            var veh = NAPI.Vehicle.CreateVehicle(myCarType, player.Position.Around(5), 0, color1, color2);
-			NAPI.Chat.SendChatMessageToPlayer(player, $"Cкорость Т/C: {(veh.MaxSpeed * 3.6)}");
-			
-        }
-
-		[Command("sethealth")]
-		public void CmdSetHealth(Player player, int amount)
-		{
-			if (amount > 50)
-			{
-				player.Health = 100;
-				return;
-			}
-
-			if (amount < 5)
-			{
-				player.SendChatMessage("You can't set health lower than 5.");
-				return;
-			}
-			player.Health = amount;
-			player.SendChatMessage($"Your health has been set to: {amount}");
-		}
-
-
-
 		[ServerEvent(Event.ResourceStop)] //This type of event is mainly used for handling stuff before resource termination.
 		public void ResourceStop()
 		{
 			Console.WriteLine("Goodbye");
 		}
-
-
 
 		[ServerEvent(Event.ResourceStartEx)] //This event is triggered when a resource starts.
 		public void OnResourceStartEx(string resourceName)
@@ -70,23 +26,17 @@ namespace Project_X
 			NAPI.Chat.SendChatMessageToAll($"Resource {resourceName} got started!");
 		}
 
-
-
 		[ServerEvent(Event.ResourceStopEx)] //This event is triggered when a resource stops.
 		public void OnResourceStopEx(string resourceName)
 		{
 			NAPI.Chat.SendChatMessageToAll($"Resource {resourceName} is stopped!");
 		}
 
-
-
 		[ServerEvent(Event.Update)] //This event is used for iterating code at server's tickrate.
 		public void OnUpdate()
 		{
 
 		}
-
-
 
 		[ServerEvent(Event.ChatMessage)] // Handling server chat.
 		public void OnChatMessage(Player player, string message)
@@ -98,8 +48,6 @@ namespace Project_X
 			}
 		}
 
-
-
 		[ServerEvent(Event.PlayerConnected)] //This event is invoked once the player has finished loading all the required resources.
 		public void OnPlayerConnected(Player player)
 		{
@@ -108,8 +56,6 @@ namespace Project_X
 			var playerPosition = NAPI.Entity.GetEntityPosition(player);
 			NAPI.Checkpoint.CreateCheckpoint(CheckpointType.Cyclinder, playerPosition, new Vector3(0, 1, 0), 1f, new Color(255, 0, 0), 0);
 		}
-
-
 
 		[ServerEvent(Event.PlayerDisconnected)] //This type of event is used for handling code when the player disconnects.
 		public void OnPlayerDisconnected(Player player, DisconnectionType type, string reason)
@@ -130,8 +76,6 @@ namespace Project_X
 			}
 		}
 
-
-
 		[ServerEvent(Event.PlayerDeath)] //This type of event is used for handling code when someone dies.
 		public void OnPlayerDeath(Player player, Player killer, uint reason)
 		{
@@ -145,15 +89,11 @@ namespace Project_X
 			}
 		}
 
-
-
 		[ServerEvent(Event.PlayerSpawn)] //This type of event is used for handling your code when you spawn.
 		public void OnPlayerSpawn(Player player)
 		{
 
 		}
-
-
 
 		[ServerEvent(Event.PlayerPickup)] //This type of event is used for handling code when the character picks up a pickup entity.
 		public void OnPlayerPickup(Player player, Pickup pickup)
@@ -161,15 +101,11 @@ namespace Project_X
 
 		}
 
-
-
 		[ServerEvent(Event.PlayerDamage)] //This event is triggered when a player's health or armor changes.
 		public void OnPlayerDamage(Player player, float healthLoss, float armorLoss)
 		{
 
 		}
-
-
 
 		[ServerEvent(Event.PlayerEnterVehicle)] // This type of event is used for handling code when the player enters any type of vehicle.
 		public void OnPlayerEnterVehicle(Player player, Vehicle vehicle, sbyte seatID)
@@ -177,15 +113,11 @@ namespace Project_X
 			NAPI.Chat.SendChatMessageToPlayer(player, "You've entered the vehicle");
 		}
 
-
-
 		[ServerEvent(Event.PlayerExitVehicle)] //This type of event is used for handling code when the player exits any type of vehicle.
 		public void OnPlayerExitVehicle(Player player, Vehicle vehicle)
 		{
 			NAPI.Chat.SendChatMessageToPlayer(player, "You've left the vehicle");
 		}
-
-
 
 		[ServerEvent(Event.PlayerWeaponSwitch)] //This event is triggered when a player changes weapon.
 		public void OnPlayerWeaponSwitch(Player player, WeaponHash oldWeapon, WeaponHash newWeapon)
@@ -193,15 +125,11 @@ namespace Project_X
 
 		}
 
-
-
 		[ServerEvent(Event.PlayerDetonateStickies)] //This event is triggered when a player detonate stickies.
 		public void OnPlayerDetonateStickies(Player player)
 		{
 
 		}
-
-
 
 		[ServerEvent(Event.PlayerEnterColshape)] //This type of event is used for handling code when the player enters a ColShape.
 		public void OnPlayerEnterColshape(ColShape shape, Player player)
@@ -209,15 +137,11 @@ namespace Project_X
 
 		}
 
-
-
 		[ServerEvent(Event.PlayerExitColshape)] //This event is triggered when a player exits a colshape.
 		public void OnPlayerExitColShape(ColShape shape, Player player)
 		{
 
 		}
-
-
 
 		[ServerEvent(Event.PlayerEnterCheckpoint)] //Event when player enters checkpoint.
 		public void OnPlayerEnterCheckpoint(Checkpoint checkpoint, Player player)
@@ -225,15 +149,11 @@ namespace Project_X
 
 		}
 
-
-
 		[ServerEvent(Event.PlayerExitCheckpoint)] //Event when player exits checkpoint.
 		public void OnPlayerExitCheckpoint(Checkpoint checkpoint, Player player)
 		{
 
 		}
-
-
 
 		[ServerEvent(Event.VehicleDamage)] //This event is triggered when a vehicle's health changes.
 		public void OnVehicleDamageHandler(Vehicle vehicle, float bodyHealthLoss, float engineHealthLoss)
@@ -241,15 +161,11 @@ namespace Project_X
 
 		}
 
-
-
 		[ServerEvent(Event.VehicleSirenToggle)] // This event is triggered when siren toggle.
 		public void OnVehicleSirenToggle(Vehicle vehicle, bool oldValue)
 		{
 
 		}
-
-
 
 		[ServerEvent(Event.VehicleDoorBreak)] //This event is triggered when a vehicle door break.
 		public void OnVehicleDoorBreak(Vehicle vehicle, int doorIndex)
@@ -257,15 +173,11 @@ namespace Project_X
 
 		}
 
-
-
 		[ServerEvent(Event.VehicleWindowSmash)] //This event is triggered when a vehicle window get smashed.
 		public void OnVehicleWindowSmash(Vehicle vehicle, int windowIndex)
 		{
 
 		}
-
-
 
 		[ServerEvent(Event.VehicleTyreBurst)] //This event is triggered when a vehicle tyre burst.
 		public void OnVehicleTyreBurst(Vehicle vehicle, int tyreIndex)
@@ -273,44 +185,16 @@ namespace Project_X
 
 		}
 
-
-
 		[ServerEvent(Event.VehicleDeath)] //This type of event is used for handling code when a vehicle gets destroyed.
 		public void OnVehicleDeath(Vehicle veh)
 		{
 
 		}
 
-
-
 		[ServerEvent(Event.VehicleTrailerChange)] //This event is triggered when a vehicle trailer change.
 		public void OnVehicleTrailerChange(Vehicle vehicle, Vehicle trailer)
 		{
 
-		}
-
-		[Command("reg")]
-		public void OnRegistration(Player player, string login, string email, string password)
-		{
-
-			bool isCreated = AccountService.CreateAccount(player, login, email, password);
-
-			if (isCreated)
-				NAPI.Chat.SendChatMessageToPlayer(player, "~g~Аккаунт успешно зарегестрирован");
-            else
-				NAPI.Chat.SendChatMessageToPlayer(player, "~r~Аккаунт с таким SocialId уже зарегестрирован," +
-					"\n пожалуйста авторизуйтесь");
-		}
-
-        [Command("login")]
-		public void OnLogin(Player player, string login, string password)
-        {
-			bool isLogin = AccountService.LoginAccount(login, password);
-
-			if(isLogin)
-				NAPI.Chat.SendChatMessageToPlayer(player, "~g~Вы успешно зашли в аккаунт");
-            else
-				NAPI.Chat.SendChatMessageToPlayer(player, "~g~Неверный пароль");
 		}
 	}
 }

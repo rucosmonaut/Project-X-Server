@@ -6,7 +6,7 @@ using System.Text;
 using Npgsql;
 using Newtonsoft.Json;
 
-namespace Project_X
+namespace Project_X.DatabaseUtils
 {
     public class DatabaseConnection
     {
