@@ -3,7 +3,7 @@ using GTANetworkAPI;
 
 namespace Project_X
 {
-    public class Project_X : Script
+    public class Events : Script
 	{
 
 		[ServerEvent(Event.ResourceStart)] //This type of event is mainly used for handling stuff after this resource has been initiated.
