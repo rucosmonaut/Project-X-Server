@@ -11,6 +11,7 @@ namespace Shared.Models
 
     public class Mother
     {
+        public int MotherId { get; set; }
         public string Name { get; set; }
         public string RussianName { get; set; }
 

@@ -13,7 +13,7 @@ namespace Shared.Models
         public string Email { get; set; }
         public string Social { get; set; }
         public string PhoneNumber { get; set; }
-        //public List<Character> Сharacters { get; set; }
+        public List<Character> Сharacters { get; set; }
         public Admin.AdminTypes AdminTypes { get; set; }
 
     }

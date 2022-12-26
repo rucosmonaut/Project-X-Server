@@ -6,9 +6,17 @@ using System.Threading.Tasks;
 
 namespace Shared.Models
 {
+    public enum ItemTypes
+    {
+        Drinks,
+        Clothes,
+        Keys,
+    }
+
     public class Item
     {
-        public string ClassName { get; set; }
-        public int Count { get; set; }
+        public ItemTypes Type { get; set; }
+        public uint Count { get; set; }
+        public uint MaxCount { get; set; }
     }
 }

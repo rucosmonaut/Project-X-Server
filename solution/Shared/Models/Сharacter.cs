@@ -7,10 +7,11 @@ namespace Shared.Models
 {
     public class Character
     {
-
+        public int CharacterId { get; set; }
         public Finances Finance { get; set; }
-        public States State { get; set; }
-        public List<Item> Inventory { get; set; }
+        //public List<Item> Inventory { get; set; }
+        public int Health { get; set; } = 100;
+        public int Armor { get; set; } = 100;
 
         //Внешность
         public SexTypes Sex { get; set; }

@@ -11,6 +11,7 @@ namespace Shared.Models
 
     public class Father
     {
+        public int FatherId { get; set; }
         public string Name { get; set; }
         public string RussianName { get; set; }
 

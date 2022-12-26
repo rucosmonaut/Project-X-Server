@@ -22,6 +22,7 @@ namespace Project_X.DatabaseUtils
     public class ApplicationContext : DbContext
     {
         public DbSet<Account> Accounts { get; set; }
+        public DbSet<Character> Characters { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -30,18 +31,8 @@ namespace Project_X.DatabaseUtils
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            /*modelBuilder.Ignore<Item>();
-
-            modelBuilder
-               .Entity<Character>()
-               .Property(c => c.Inventory)
-               .HasConversion(
-                   i => JsonConvert.SerializeObject(i),
-                   i => JsonConvert.DeserializeObject<List<Item>>(i) 
-               );
             modelBuilder.Entity<Character>()
                 .OwnsOne(c => c.Finance);
-*/
         }
     }
 }
