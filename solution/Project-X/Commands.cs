@@ -4,7 +4,7 @@ using Shared.HashCodes;
 
 namespace Project_X
 {
-    internal class Commands : Script
+    public class Commands : Script
     {
         [Command("car")]
         public void CreateCar(Player player, string type, int color1, int color2)

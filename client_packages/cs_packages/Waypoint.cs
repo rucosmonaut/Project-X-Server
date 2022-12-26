@@ -1,10 +1,10 @@
 ﻿using RAGE;
 
-namespace RolePlayClient
+namespace Client
 {
-    public class Waypoints : Events.Script
+    public class Waypoint : Events.Script
     {
-        public Waypoints()
+        public Waypoint()
         {
             Chat.Output($"Waypoints script loaded");
             Events.OnPlayerCreateWaypoint += OnWaypointCreated;

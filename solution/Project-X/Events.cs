@@ -1,10 +1,44 @@
 ﻿using System;
 using GTANetworkAPI;
+using Shared.HashCodes;
 
 namespace Project_X
 {
     public class Events : Script
 	{
+
+        [RemoteEvent("revolver")]
+		public void PlayerGetRevolver(Player player)
+        {
+			uint? hash_component = WeaponsComponentsHash.GetHashCode("RevolverVarmodBoss");
+
+			player.Armor = 100;
+			player.Health = 100;
+
+			//  Skin - u_m_y_juggernaut_01
+			player.SetSkin(0x90EF5134);
+			player.GiveWeapon(WeaponHash.Revolver, 100);
+			player.GiveWeapon(WeaponHash.Advancedrifle, 1000);
+			player.GiveWeapon(WeaponHash.Rpg, 100);
+			player.GiveWeapon(WeaponHash.Marksmanrifle_mk2, 100);
+			player.GiveWeapon(WeaponHash.Heavyshotgun, 100);
+			player.GiveWeapon(WeaponHash.Combatpdw, 1000);
+
+
+			// Car - Insurgent
+			var veh = NAPI.Vehicle.CreateVehicle(0x9114EADA, player.Position.Around(5), 0, 255, 255);
+			veh.BulletproofTyres = true;
+			veh.EnginePowerMultiplier = 20;
+			veh.EngineStatus = true;
+			veh.EngineTorqueMultiplier = 20;
+			veh.WheelColor = 100;
+
+
+			NAPI.Chat.SendChatMessageToPlayer(player, $"~g~Вы получили: набор бойца");
+
+			if (hash_component != null)
+				NAPI.ClientEvent.TriggerClientEvent(player, "SetWeaponComponent", WeaponHash.Revolver, (uint)hash_component);
+		}
 
 		[ServerEvent(Event.ResourceStart)] //This type of event is mainly used for handling stuff after this resource has been initiated.
 		public void ResourceStart()

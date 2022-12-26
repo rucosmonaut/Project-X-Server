@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Shared.HashCodes
+namespace Client.HashCodes
 {
     public class WeaponsHash
     {
