@@ -7,7 +7,7 @@ namespace Project_X
     public class Commands : Script
     {
         [Command("car")]
-        public void CreateCar(Player player, string type, int color1, int color2)
+        public void CreateCar(PlayerModel player, string type, int color1, int color2)
         {
             uint myCarType = NAPI.Util.GetHashKey(type);
             var veh = NAPI.Vehicle.CreateVehicle(myCarType, player.Position.Around(5), 0, color1, color2);

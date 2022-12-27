@@ -1,5 +1,6 @@
 ﻿using System;
 using GTANetworkAPI;
+using RAGE;
 using Shared.HashCodes;
 
 namespace Project_X
@@ -43,7 +44,8 @@ namespace Project_X
 		[ServerEvent(Event.ResourceStart)] //This type of event is mainly used for handling stuff after this resource has been initiated.
 		public void ResourceStart()
 		{
-			Console.WriteLine("\n--------------------------------------");
+            Entities.Players.CreateEntity = netHandle => new PlayerModel(netHandle);
+            Console.WriteLine("\n--------------------------------------");
 			Console.WriteLine("Blank Script by your name here");
             Console.WriteLine("--------------------------------------\n");
 		}

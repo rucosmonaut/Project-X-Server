@@ -1,6 +1,10 @@
 ﻿using Client.HashCodes;
 using RAGE;
 using RAGE.Elements;
+using RAGE.NUI;
+using RAGE.Ui;
+using System;
+using System.Collections.Generic;
 using System.Drawing;
 
 namespace Client
@@ -9,12 +13,30 @@ namespace Client
     {
         public static bool WeaponComponentMenuVisible = false;
         private static readonly RAGE.NUI.UIMenu UI = new RAGE.NUI.UIMenu("Компоненты для оружия", "Выберите необходимые компоненты для вашего оружия");
-
+        private static MenuPool menuPool = new MenuPool();
         public Weapon()
         {
             Chat.Output($"Weapon script loaded");
             Events.Add("SetWeaponComponent", OnSetWeaponComponent);
             Events.Add("ShowComponentMenu", OnShowComponentMenu);
+            Events.Tick += Tick;
+            foreach (var item in WeaponsComponentsHash.HeavyRevolverMkIIComponents)
+            {
+                UIMenuItem menuItem = new UIMenuItem(item.Key)
+                {
+                    ItemData = item.Value
+                };
+                menuItem.Activated += MenuItem_Activated;
+                UI.AddItem(menuItem);
+            }
+            menuPool.Add(UI);
+            Input.Bind(0x33, false, ShowComponentMenu);
+        }
+
+
+        private void Tick(List<Events.TickNametagData> nametags)
+        {
+            menuPool.ProcessMenus();
         }
 
         private void OnSetWeaponComponent(object[] args)
@@ -32,18 +54,8 @@ namespace Client
         public static void ShowComponentMenu()
         {
             Chat.Output($"~g~ShowComponentMenuт");
-            
-            foreach (var item in WeaponsComponentsHash.HeavyRevolverMkIIComponents)
-            {
-                RAGE.NUI.UIMenuItem menuItem = new RAGE.NUI.UIMenuItem(item.Key)
-                {
-                    ItemData = item.Value
-                };
-                menuItem.Activated += MenuItem_Activated;
-                UI.AddItem(menuItem);
-            }
 
-            UI.Visible = true;
+            UI.Visible = UI.Visible != true;
             UI.Draw();
             //container.Draw();
         }
